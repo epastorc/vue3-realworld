@@ -17,7 +17,8 @@
         </Suspense>
       </div>
       <div class="notification">
-        <SnackBar v-if="showNotification" />
+        Error {{error}}
+        <SnackBar v-if="showNotification || error" />
       </div>
     </main>
     <footer></footer>
@@ -33,7 +34,7 @@ import { Tweet } from "./feature/tweet/model/tweet";
 
 //States
 import notificationState from "@/feature/notification/state/state";
-import { defineComponent } from "vue";
+import { defineComponent, onErrorCaptured, ref } from "vue";
 
 export default defineComponent({
   name: "App",
@@ -47,8 +48,15 @@ export default defineComponent({
   },
   setup() {
     const { state, toggleNotification } = notificationState();
-
+    //Catch error in the child
+    let error = ref(null);
+    onErrorCaptured(e => {
+      error.value = e as any;
+      return true;
+      });
+  
     return {
+      error,
       showNotification: state.showNotification,
       toggleNotification,
     };
