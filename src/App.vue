@@ -17,7 +17,6 @@
         </Suspense>
       </div>
       <div class="notification">
-        Error {{error}}
         <SnackBar v-if="showNotification || error" />
       </div>
     </main>
