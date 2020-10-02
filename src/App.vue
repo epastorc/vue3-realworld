@@ -7,11 +7,11 @@
       <div class="content">
         <Suspense>
           <template #default>
-            <TweetList />
+              <TweetList />
           </template>
           <template  #fallback>
             <div class="loading">
-              <strong>Loading ...</strong>
+              <Loading />
             </div>
           </template>
         </Suspense>
@@ -25,15 +25,19 @@
 </template>
 
 <script lang="ts">
-import TweetList from "./feature/tweet/TweetList.vue";
 import Navbar from "./components/Navbar.vue";
 import SnackBar from "./components/SnackBar.vue";
+import Loading from "./components/Loading.vue";
 // eslint-disable-next-line no-unused-vars
 import { Tweet } from "./feature/tweet/model/tweet";
 
 //States
 import notificationState from "@/feature/notification/state/state";
-import { defineComponent, onErrorCaptured, ref } from "vue";
+import { defineComponent, onErrorCaptured, ref, defineAsyncComponent } from "vue";
+
+const TweetList = defineAsyncComponent(
+  () => import("@/feature/tweet/TweetList.vue")
+);
 
 export default defineComponent({
   name: "App",
@@ -41,6 +45,7 @@ export default defineComponent({
     TweetList,
     Navbar,
     SnackBar,
+    Loading,
   },
   data() {
     return {};
