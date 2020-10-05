@@ -52,7 +52,7 @@ export default defineComponent({
   },
   setup() {
     const { state, toggleNotification } = notificationState();
-    //Catch error in the child
+    //Catch the error from the child
     let error = ref(null);
     onErrorCaptured(e => {
       error.value = e as any;

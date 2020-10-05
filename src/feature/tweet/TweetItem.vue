@@ -18,15 +18,18 @@
 
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
-import { Prop } from "vue-property-decorator";
+// eslint-disable-next-line no-unused-vars
+import { defineComponent, PropType } from "vue";
 // eslint-disable-next-line no-unused-vars
 import { Tweet } from "./model/tweet";
-@Options({})
-export default class TweetItem extends Vue {
-  @Prop({ required: true })
-  public tweet!: Tweet;
-}
+export default defineComponent({
+  name: "TweetItem",
+  props: {
+    tweet: {
+      type:  Object as PropType<Tweet>,
+    },
+  },
+})
 </script>
 
 <style scoped>
