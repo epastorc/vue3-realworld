@@ -1,8 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import TweetItem from '../../TweetItem.vue'
+import Navbar from "../../Navbar.vue";
 
 describe('TweetItem.vue', () => {
   it('render component with props', () => {
+    const clickAvatar = jest.fn();
       const tweet = {
         accountName: "test",
         avatar:"url",
@@ -10,10 +11,12 @@ describe('TweetItem.vue', () => {
         timeAgo:"2ms",
         hashtag:"@test"
       }
-    const wrapper = shallowMount(TweetItem, {
-        props: { tweet: tweet }
+    const wrapper = shallowMount(Navbar, {
+        props: { clickAvatar: clickAvatar }
       })
     expect(wrapper).toMatchSnapshot();
+    wrapper.find(".avatar").trigger("click");
+    expect(clickAvatar).toBeCalled();
 
   })
 })
